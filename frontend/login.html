@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QU Student Management - Login</title>
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome</h1>
+        <h3>QU Student Management</h3>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username"></label>
+                <input type="text" id="username" name="username" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <label for="password"></label>
+                <input type="password" id="password" name="password" placeholder="password" required>
+            </div>
+            <div class="error-message" id="loginError"></div>
+            <button type="submit" class="btn-primary">Login</button>
+        </form>
+    </div>
+    <script src="./js/login.js"></script>
+</body>
+</html>

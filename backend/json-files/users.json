@@ -1,0 +1,106 @@
+[
+    {
+      "id": "s1001",
+      "username": "student1",
+      "password": "pass123",
+      "userType": "student",
+      "name": "Sara Ali",
+      "completedCourses": [
+        {"courseId": "CMPS101", "grade": "A"}
+      ]
+    },
+    {
+        "id": "s1002",
+        "username": "student2",
+        "password": "pass123",
+        "userType": "student",
+        "name": "Fatima Ahmed",
+        "completedCourses": [
+          {"courseId": "CMPS101", "grade": "A"},
+          {"courseId": "CMPS151", "grade": "B+"}
+        ]
+    },
+    {
+        "id": "s1003",
+        "username": "student3",
+        "password": "pass123",
+        "userType": "student",
+        "name": "Alaa Hasan",
+        "completedCourses": [
+          {"courseId": "CMPS151", "grade": "B+"},
+          {"courseId": "CMPS251", "grade": "C+"}
+        ]
+    },
+    {
+        "id": "s1004",
+        "username": "student4",
+        "password": "pass123",
+        "userType": "student",
+        "name": "Noora Hamad",
+        "completedCourses": [
+            {"courseId": "CMPS151", "grade": "B"},
+            {"courseId": "CMPS251", "grade": "A"},
+            {"courseId": "CMPS303", "grade": "B"}
+        ]
+    },
+    {
+        "id": "s1005",
+        "username": "student5",
+        "password": "pass123",
+        "userType": "student",
+        "name": "Reem Mahmoud",
+        "completedCourses": [
+            {"courseId": "CMPS151", "grade": "A"},
+            {"courseId": "CMPS251", "grade": "B"},
+            {"courseId": "CMPS303", "grade": "C"},
+            {"courseId": "CMPS310", "grade": "C+"}
+        ]
+    },
+    {
+        "id": "s1006",
+        "username": "student6",
+        "password": "pass123",
+        "userType": "student",
+        "name": "Mai Khalid",
+        "completedCourses": [
+            {"courseId": "CMPS151", "grade": "A"},
+            {"courseId": "CMPS251", "grade": "B"},
+            {"courseId": "CMPS303", "grade": "C"},
+            {"courseId": "CMPS351", "grade": "C"},
+            {"courseId": "CMPS310", "grade": "B"}
+        ]
+    },
+
+    {
+      "id": "i2001",
+      "username": "instructor1",
+      "password": "pass123",
+      "userType": "instructor",
+      "name": "Dr. Mahmoud Barhamgi",
+      "expertiseAreas": ["Web Development", "Databases"]
+    },
+    {
+        "id": "i2002",
+        "username": "instructor2",
+        "password": "pass123",
+        "userType": "instructor",
+        "name": "Dr. Khaled Khan",
+        "expertiseAreas": ["Networks", "Cybersecurity"]
+    },
+    {
+        "id": "i2003",
+        "username": "instructor3",
+        "password": "pass123",
+        "userType": "instructor",
+        "name": "Dr. Mohamed Ahmed",
+        "expertiseAreas": ["software eng", "AI"]
+    },
+
+    {
+      "id": "a3001",
+      "username": "admin1",
+      "password": "pass123",
+      "userType": "administrator",
+      "name": "Prof. Amr Mohamed"
+    }
+  ]
