@@ -24,12 +24,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 window.location.href = "index.html";
             } else {
                 loginError.textContent = "Invalid username or password.";
-                //loginError.style.color = "red";
             }
         } catch (error) {
             console.error("Error:", error);
             loginError.textContent = "Error logging in. Try again later.";
-            loginError.style.color = "red";
         }
     });
 });

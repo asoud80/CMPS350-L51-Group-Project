@@ -1,82 +1,92 @@
 [
-    {
-      "id": "CMPS101",
-      "name": "Introduction to Computing",
-      "credits": 3,
-      "prerequisites": [],
-      "isOpenForRegistration": true,
-      "description": "Basic concepts of computer systems..."
-    },
-    {
-      "id": "CMPS151",
-      "name": "Programming Concepts",
-      "credits": 3,
-      "prerequisites": [],
-      "isOpenForRegistration": true,
-      "description": "Introduction to programming concepts..."
-    },
-    {
-      "id": "CMPS251",
-      "name": "Object-Oriented Programming",
-      "credits": 4,
-      "prerequisites": ["CMPS151"],
-      "isOpenForRegistration": true,
-      "description": "Object-oriented design and implementation..."
-    },
-    {
-      "id": "CMPS303",
-      "name": "Data Structures",
-      "credits": 4,
-      "prerequisites": ["CMPS251"],
-      "isOpenForRegistration": true,
-      "description": "Basic data structures and algorithms..."
-    },
-    {
-        "id": "CMPS310",
-        "name": "Software Engineering",
-        "credits": 4,
-        "prerequisites": ["CMPS251"],
-        "isOpenForRegistration": true,
-        "description": "Software development lifecycle..."
-    },
-    {
-        "id": "CMPS350",
-        "name": "Web Development Fundamentals",
-        "credits": 3,
-        "prerequisites": ["CMPS251"],
-        "isOpenForRegistration": true,
-        "description": "Web frontend/backend development..."
-    },
-    {
-      "id": "CMPS351",
-      "name": "Database Systems",
-      "credits": 4,
-      "prerequisites": ["CMPS251"],
-      "isOpenForRegistration": true,
-      "description": "Introduction to database concepts..."
-    },
-    {
-        "id": "CMPS355",
-        "name": "Data Communication & Networks1",
-        "credits": 4,
-        "prerequisites": ["CMPS303"],
-        "isOpenForRegistration": true,
-        "description": "..."
-    },
-    {
-        "id": "CMPS385",
-        "name": "Computer Security",
-        "credits": 3,
-        "prerequisites": ["CMPS355"],
-        "isOpenForRegistration": true,
-        "description": "..."
-    },
-    {
-        "id": "CMPS405",
-        "name": "Operating Systems",
-        "credits": 4,
-        "prerequisites": ["CMPS303"],
-        "isOpenForRegistration": true,
-        "description": "..."
-    }
-  ]
+  {
+    "id": "CMPS101",
+    "name": "Introduction to Computing",
+    "category": "Foundational",
+    "credits": 3,
+    "prerequisites": [],
+    "isOpenForRegistration": true,
+    "description": "Basic concepts of computer systems..."
+  },
+  {
+    "id": "CMPS151",
+    "name": "Programming Concepts",
+    "category": "Programming",
+    "credits": 3,
+    "prerequisites": [],
+    "isOpenForRegistration": true,
+    "description": "Introduction to programming concepts..."
+  },
+  {
+    "id": "CMPS251",
+    "name": "Object-Oriented Programming",
+    "category": "Programming",
+    "credits": 4,
+    "prerequisites": ["CMPS151"],
+    "isOpenForRegistration": true,
+    "description": "Object-oriented design and implementation..."
+  },
+  {
+    "id": "CMPS303",
+    "name": "Data Structures",
+    "category": "Algorithms & Data Structures",
+    "credits": 4,
+    "prerequisites": ["CMPS251"],
+    "isOpenForRegistration": true,
+    "description": "Basic data structures and algorithms..."
+  },
+  {
+    "id": "CMPS310",
+    "name": "Software Engineering",
+    "category": "Software Development",
+    "credits": 4,
+    "prerequisites": ["CMPS251"],
+    "isOpenForRegistration": true,
+    "description": "Software development lifecycle..."
+  },
+  {
+    "id": "CMPS350",
+    "name": "Web Development Fundamentals",
+    "category": "Web Development",
+    "credits": 3,
+    "prerequisites": ["CMPS251"],
+    "isOpenForRegistration": true,
+    "description": "Web frontend/backend development..."
+  },
+  {
+    "id": "CMPS351",
+    "name": "Database Systems",
+    "category": "Databases",
+    "credits": 4,
+    "prerequisites": ["CMPS251"],
+    "isOpenForRegistration": true,
+    "description": "Introduction to database concepts..."
+  },
+  {
+    "id": "CMPS355",
+    "name": "Data Communication & Networks1",
+     "category": "Networking",
+    "credits": 4,
+    "prerequisites": ["CMPS303"],
+    "isOpenForRegistration": true,
+    "description": "Concepts and principles underlying data communication networks..."
+  },
+  {
+    "id": "CMPS385",
+    "name": "Computer Security",
+    "category": "Cybersecurity",
+    "credits": 3,
+    "prerequisites": ["CMPS355"],
+    "isOpenForRegistration": true,
+    "description": "Fundamentals of information security..."
+  },
+  {
+    "id": "CMPS405",
+    "name": "Operating Systems",
+    "category": "Systems",
+    "credits": 4,
+    "prerequisites": ["CMPS303"],
+    "isOpenForRegistration": true,
+    "description": "Fundamental concepts of operating system design and implementation..."
+  }
+]
