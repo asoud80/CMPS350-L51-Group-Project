@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="./js/common.js"></script>
+    <script src="./js/studentScript.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">QU Student Management</div>
+            <div class="user-info">
+                <span id="userName">User Name</span>
+                <button id="logoutBtn">Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="dashboard-container">
+
+        <section id="availableCourses" class="dashboard-section">
+            <h2>Available Courses</h2>
+            <div class="search-container">
+                <div class="search-group">
+                    <input type="text" id="courseSearch" placeholder="Search by course name...">
+                </div>
+                <div class="filter-group">
+                    <select id="categoryFilter">
+                        <option value="">All Categories</option>
+                        <option value="Foundation">Foundation</option>
+                        <option value="Programming">Programming</option>
+                        <option value="Algorithms">Algorithms</option>
+                        <option value="Databases">Databases</option>
+                        <option value="Web Development">Web Development</option>
+                        <option value="Software Development">Software Development</option>
+                        <option value="Networking">Networking</option>
+                        <option value="Cybersecurity">Cybersecurity</option>
+                        <option value="Systems">Systems</option>
+                    </select>
+                </div>
+            </div>
+            <div id="courseList" class="course-list">
+                <!-- Courses will be loaded here -->
+            </div>
+        </section>
+
+        <!--in this section we can View their learning path using js by hiding the previous section and showing this one-->
+        <!--<section id="learningPath" class="dashboard-section"></section>-->
+
+    </main>
+</body>
+</html>

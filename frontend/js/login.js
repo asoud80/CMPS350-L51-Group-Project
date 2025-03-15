@@ -20,11 +20,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Store user session
                 localStorage.setItem("loggedInUser", JSON.stringify(user));
 
-                // Redirect to main page
-                window.location.href = "index.html";
+                // Redirect based on user type
+                if (user.userType === 'student') {window.location.href = 'student-dashboard.html';} 
+
+                else if (user.userType === 'instructor') {window.location.href = 'instruct-dashboard.html';} 
+ 
+                else if (user.userType === 'administrator') {window.location.href = 'admin-dashboard.html';}
+
             } else {
                 loginError.textContent = "Invalid username or password.";
             }
+
         } catch (error) {
             console.error("Error:", error);
             loginError.textContent = "Error logging in. Try again later.";

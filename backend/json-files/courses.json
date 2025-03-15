@@ -2,7 +2,7 @@
   {
     "id": "CMPS101",
     "name": "Introduction to Computing",
-    "category": "Foundational",
+    "category": "Foundation",
     "credits": 3,
     "prerequisites": [],
     "isOpenForRegistration": true,
@@ -29,7 +29,7 @@
   {
     "id": "CMPS303",
     "name": "Data Structures",
-    "category": "Algorithms & Data Structures",
+    "category": "Algorithms",
     "credits": 4,
     "prerequisites": ["CMPS251"],
     "isOpenForRegistration": true,
@@ -65,7 +65,7 @@
   {
     "id": "CMPS355",
     "name": "Data Communication & Networks1",
-     "category": "Networking",
+    "category": "Networking",
     "credits": 4,
     "prerequisites": ["CMPS303"],
     "isOpenForRegistration": true,
@@ -77,7 +77,7 @@
     "category": "Cybersecurity",
     "credits": 3,
     "prerequisites": ["CMPS355"],
-    "isOpenForRegistration": true,
+    "isOpenForRegistration": false,
     "description": "Fundamentals of information security..."
   },
   {
@@ -85,8 +85,8 @@
     "name": "Operating Systems",
     "category": "Systems",
     "credits": 4,
-    "prerequisites": ["CMPS303"],
-    "isOpenForRegistration": true,
+    "prerequisites": ["CMPS303", "CMPS351"],
+    "isOpenForRegistration": false,
     "description": "Fundamental concepts of operating system design and implementation..."
   }
 ]
