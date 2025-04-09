@@ -15,13 +15,13 @@
             <div class="logo">QU Student Management</div>
             <div class="user-info">
                 <span id="userName">User Name</span>
+                <button id="viewLearningPath" class="nav-btn">My Learning Path</button>
                 <button id="logoutBtn">Logout</button>
             </div>
         </nav>
     </header>
 
     <main class="dashboard-container">
-
         <section id="availableCourses" class="dashboard-section">
             <h2>Available Courses</h2>
             <div class="search-container">
@@ -47,10 +47,19 @@
                 <!-- Courses will be loaded here -->
             </div>
         </section>
-
-        <!--in this section we can View their learning path using js by hiding the previous section and showing this one-->
-        <!--<section id="learningPath" class="dashboard-section"></section>-->
-
     </main>
+
+    <!-- Registration Modal -->
+    <div id="registrationModal" class="registration-modal">
+        <div class="modal-content">
+            <button id="closeModal" class="close-btn">&times;</button>
+            <h3>Register for <span id="modalCourseName"></span></h3>
+            <p id="courseDescription"></p>
+            <div id="instructorList" class="instructor-list">
+                <!-- Instructors will be loaded here -->
+            </div>
+            <div id="registrationMessage"></div>
+        </div>
+    </div>
 </body>
 </html>

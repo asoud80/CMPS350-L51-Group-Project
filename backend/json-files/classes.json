@@ -1,0 +1,58 @@
+[
+    {
+      "classId": "CLS101",
+      "courseId": "CMPS101",
+      "instructorId": "i2001",
+      "students": ["s1001"],
+      "maxStudents": 30,
+      "status": "validated"
+    },
+    {
+      "classId": "CLS151",
+      "courseId": "CMPS151",
+      "instructorId": "i2003",
+      "students": ["s1002"],
+      "maxStudents": 30,
+      "status": "validated"
+    },
+    {
+      "classId": "CLS251",
+      "courseId": "CMPS251",
+      "instructorId": "i2003",
+      "students": ["s1003", "s1004"],
+      "maxStudents": 30,
+      "status": "validated"
+    },
+    {
+      "classId": "CLS303",
+      "courseId": "CMPS303",
+      "instructorId": "i2002",
+      "students": ["s1004", "s1005"],
+      "maxStudents": 30,
+      "status": "validated"
+    },
+    {
+      "classId": "CLS310",
+      "courseId": "CMPS310",
+      "instructorId": "i2003",
+      "students": ["s1005"],
+      "maxStudents": 30,
+      "status": "validated"
+    },
+    {
+      "classId": "CLS350",
+      "courseId": "CMPS350",
+      "instructorId": "i2001",
+      "students": [],
+      "maxStudents": 30,
+      "status": "validated"
+    },
+    {
+      "classId": "CLS351",
+      "courseId": "CMPS351",
+      "instructorId": "i2001",
+      "students": ["s1005", "s1006"],
+      "maxStudents": 30,
+      "status": "validated"
+    }
+  ]

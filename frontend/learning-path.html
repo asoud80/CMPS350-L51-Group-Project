@@ -1,0 +1,50 @@
+<!-- learning-path.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Learning Path</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="./js/common.js"></script>
+    <script src="./js/learningPath.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">QU Student Management</div>
+            <div class="user-info">
+                <span id="userName">User Name</span>
+                <button id="logoutBtn">Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="dashboard-container">
+        <div class="navigation-buttons">
+            <button id="backToCourses" class="nav-btn">Back to Courses</button>
+        </div>
+
+        <section class="dashboard-section">
+            <h2>My Learning Path</h2>
+            
+            <div class="learning-paths">
+                <div class="path-section">
+                    <h3>Completed Courses</h3>
+                    <div id="completedCourses" class="course-list"></div>
+                </div>
+                
+                <div class="path-section">
+                    <h3>In Progress</h3>
+                    <div id="inProgressCourses" class="course-list"></div>
+                </div>
+                
+                <div class="path-section">
+                    <h3>Pending Registration</h3>
+                    <div id="pendingCourses" class="course-list"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
