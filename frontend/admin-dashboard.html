@@ -12,14 +12,44 @@
 <body>
     <header>
         <nav>
-            <div class="logo">QU Student Management</div>
+            <div class="logo">QU Student Management - Admin</div>
             <div class="user-info">
-                <span id="userName">User Name</span>
+                <span id="userName">Admin</span>
                 <button id="logoutBtn">Logout</button>
             </div>
         </nav>
     </header>
 
+    <main class="dashboard-container">
+        <section class="dashboard-section">
+            <h2>Courses and Classes</h2>
+            <div id="courseClassList">
+                <!-- Dynamic course/class list will be loaded here -->
+            </div>
+        </section>
 
+        <section class="dashboard-section">
+            <h2>Create New Course</h2>
+            <form id="createCourseForm">
+                <input type="text" id="courseId" placeholder="Course ID (e.g. CMPS360)" required>
+                <input type="text" id="courseName" placeholder="Course Name" required>
+                <input type="text" id="courseCategory" placeholder="Category" required>
+                <textarea id="courseDescription" placeholder="Description"></textarea>
+                <input type="text" id="coursePrerequisites" placeholder="Prerequisites (comma-separated IDs)">
+                <button type="submit">Add Course</button>
+            </form>
+        </section>
+
+        <section class="dashboard-section">
+            <h2>Create New Class</h2>
+            <form id="createClassForm">
+                <input type="text" id="classCourseId" placeholder="Course ID" required>
+                <input type="text" id="instructorId" placeholder="Instructor ID" required>
+                <input type="number" id="maxStudents" placeholder="Max Students" required>
+                <button type="submit">Add Class</button>
+            </form>
+        </section>
+    </main>
+   
 </body>
 </html>
