@@ -3,24 +3,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const createCourseForm = document.getElementById('createCourseForm');
     const createClassForm = document.getElementById('createClassForm');
 
-    let courses = [];
-    let classes = []; // new array to hold class data
+  
+    let courses = JSON.parse(localStorage.getItem('courses')) || [];
+    let classes = JSON.parse(localStorage.getItem('classes')) || [];
 
-    // Load existing courses from JSON
-    fetch('../backend/json-files/courses.json')
-        .then(response => response.json())
-        .then(data => {
-            courses = data;
-            renderCourses();
-        })
-        .catch(error => console.error('Error loading courses:', error));
-
-    // Mock data for existing classes
-    classes = [
-        { classId: 'CLS101', courseId: 'CMPS101', instructorId: 'i2001', students: ['s1001'], status: 'pending' },
-        { classId: 'CLS251', courseId: 'CMPS251', instructorId: 'i2002', students: ['s1003', 's1004'], status: 'pending' }
-    ];
-
+  
     function renderCourses() {
         courseClassList.innerHTML = '';
         courses.forEach(course => {
@@ -37,17 +24,26 @@ document.addEventListener('DOMContentLoaded', function () {
                     ${relatedClasses.map(c => `
                         <li>
                             Class ${c.classId} (Instructor: ${c.instructorId}) - ${c.students.length} students
-                            <button onclick="validateClass('${c.classId}')">Validate</button>
-                            <button onclick="cancelClass('${c.classId}')">Cancel</button>
+                            <button class="register-btn" data-validate="${c.classId}">Validate</button>
+                            <button class="register-btn" data-cancel="${c.classId}">Cancel</button>
                         </li>
                     `).join('')}
                 </ul>
             `;
             courseClassList.appendChild(section);
         });
+
+        // Event delegation for Validate and Cancel buttons
+        document.querySelectorAll('[data-validate]').forEach(btn => {
+            btn.addEventListener('click', () => validateClass(btn.dataset.validate));
+        });
+
+        document.querySelectorAll('[data-cancel]').forEach(btn => {
+            btn.addEventListener('click', () => cancelClass(btn.dataset.cancel));
+        });
     }
 
-    // Handle course creation
+   
     createCourseForm.addEventListener('submit', function (e) {
         e.preventDefault();
 
@@ -56,18 +52,22 @@ document.addEventListener('DOMContentLoaded', function () {
             name: document.getElementById('courseName').value,
             category: document.getElementById('courseCategory').value,
             description: document.getElementById('courseDescription').value,
-            prerequisites: document.getElementById('coursePrerequisites').value.split(',').map(p => p.trim()).filter(p => p),
+            prerequisites: document.getElementById('coursePrerequisites').value
+                .split(',')
+                .map(p => p.trim())
+                .filter(p => p),
             credits: 3,
             isOpenForRegistration: true
         };
 
         courses.push(newCourse);
+        localStorage.setItem('courses', JSON.stringify(courses));
         renderCourses();
         createCourseForm.reset();
         alert('Course added successfully!');
     });
 
-    // Handle class creation
+   
     createClassForm.addEventListener('submit', function (e) {
         e.preventDefault();
 
@@ -81,17 +81,19 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         classes.push(newClass);
+        localStorage.setItem('classes', JSON.stringify(classes));
         renderCourses();
         createClassForm.reset();
         alert('Class created successfully!');
     });
 
-    // Validate a class
-    window.validateClass = function (classId) {
+    
+    function validateClass(classId) {
         const foundClass = classes.find(c => c.classId === classId);
         if (foundClass) {
             if (foundClass.students.length >= 3) {
                 foundClass.status = 'validated';
+                localStorage.setItem('classes', JSON.stringify(classes));
                 alert(`Class ${classId} validated.`);
             } else {
                 alert(`Class ${classId} has too few students to be validated.`);
@@ -100,10 +102,13 @@ document.addEventListener('DOMContentLoaded', function () {
         renderCourses();
     }
 
-    // Cancel a class
-    window.cancelClass = function (classId) {
+   
+    function cancelClass(classId) {
         classes = classes.filter(c => c.classId !== classId);
+        localStorage.setItem('classes', JSON.stringify(classes));
         alert(`Class ${classId} has been cancelled.`);
         renderCourses();
     }
+
+    renderCourses();
 });
