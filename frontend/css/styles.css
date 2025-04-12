@@ -273,3 +273,79 @@ header nav {
         width: 90%;
     }
 }
+.course-card {
+    background: #fff8f1;
+    border-radius: 10px;
+    padding: 20px;
+    border-left: 6px solid #8B6939;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.course-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+.course-card h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: #8B6939;
+}
+.register-btn {
+    background: linear-gradient(135deg, #8B6939, #b58c5d);
+    color:#fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+}
+
+.register-btn:hover {
+    background: linear-gradient(135deg, #72542a, #9e7748);
+}
+
+.course-card ul {
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.course-card li {
+    margin-bottom: 8px;
+    list-style-type: disc;
+}
+
+.course-card input[type="text"] {
+    padding: 5px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+.user-info span {
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
+}
+.status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    background-color: #aaa;
+    margin-left: 10px;
+}
+
+.status-validated {
+    background-color: #27ae60;
+}
+
+.status-pending {
+    background-color: #e67e22;
+}
+
+

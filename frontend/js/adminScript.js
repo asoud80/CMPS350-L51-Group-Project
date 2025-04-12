@@ -24,9 +24,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     ${relatedClasses.map(c => `
                         <li>
                             Class ${c.classId} (Instructor: ${c.instructorId}) - ${c.students.length} students
+                            <span class="status-badge ${c.status === 'validated' ? 'status-validated' : 'status-pending'}">
+                                ${c.status}
+                            </span><br/>
                             <button class="register-btn" data-validate="${c.classId}">Validate</button>
                             <button class="register-btn" data-cancel="${c.classId}">Cancel</button>
                         </li>
+
                     `).join('')}
                 </ul>
             `;
