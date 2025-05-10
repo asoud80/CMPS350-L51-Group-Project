@@ -1,0 +1,114 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Single User model with type discrimination
+model User {
+  id         String   @id @default(cuid())
+  username   String   @unique
+  password   String
+  userType   String   // "student", "instructor", or "administrator"
+  name       String
+  
+  // Student-specific fields
+  completedCourses UserCompletedCourse[] @relation("UserCompletedCourses")
+  enrolledClasses  ClassEnrollment[]     @relation("StudentEnrollments")
+  
+  // Instructor-specific fields
+  taughtClasses  Class[]   @relation("InstructorClasses")
+  // Expertise areas for instructors
+  expertiseAreas ExpertiseArea[] @relation("UserExpertiseAreas")
+  
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+// Course model
+model Course {
+  id                   String    @id
+  name                 String
+  category             String
+  credits              Int
+  isOpenForRegistration Boolean  @default(true)
+  description          String
+  
+  // Relationships
+  prerequisites       CoursePrerequisite[] @relation("CourseHasPrerequisites")
+  isPrerequisiteFor   CoursePrerequisite[] @relation("CourseIsPrerequisite")
+  classes             Class[]
+  completedBy         UserCompletedCourse[]
+  
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
+
+// Class model
+model Class {
+  id           String   @id
+  courseId     String
+  instructorId String
+  maxStudents  Int
+  status       String
+  
+  // Relationships
+  course      Course    @relation(fields: [courseId], references: [id])
+  instructor  User      @relation("InstructorClasses", fields: [instructorId], references: [id])
+  enrollments ClassEnrollment[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Course prerequisites
+model CoursePrerequisite {
+  courseId            String
+  prerequisiteCourseId String
+  
+  course              Course @relation("CourseHasPrerequisites", fields: [courseId], references: [id])
+  prerequisiteCourse  Course @relation("CourseIsPrerequisite", fields: [prerequisiteCourseId], references: [id])
+  
+  @@id([courseId, prerequisiteCourseId])
+}
+
+// Class enrollments - direct relation between student and class
+model ClassEnrollment {
+  userId    String
+  classId   String
+  enrolledAt DateTime @default(now())
+  
+  user      User     @relation("StudentEnrollments", fields: [userId], references: [id], onDelete: Cascade)
+  class     Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
+  
+  @@id([userId, classId])
+}
+
+// Expertise areas model
+model ExpertiseArea {
+  id       String @id @default(cuid())
+  name     String
+  userId   String
+  user     User   @relation("UserExpertiseAreas", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([name, userId])
+}
+
+// Completed courses - direct relation between student and course
+model UserCompletedCourse {
+  userId     String
+  courseId   String
+  grade      String
+  completedAt DateTime @default(now())
+  
+  user       User   @relation("UserCompletedCourses", fields: [userId], references: [id], onDelete: Cascade)
+  course     Course @relation(fields: [courseId], references: [id])
+  
+  @@id([userId, courseId])
+}
