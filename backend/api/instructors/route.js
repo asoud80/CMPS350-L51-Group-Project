@@ -1,4 +1,4 @@
-import { getAllInstructors, createInstructor } from '../../repo/instructor';
+import { getAllInstructors, createInstructor } from '../../../repo/instructor';
 
 export async function GET(request) {
   const url = new URL(request.url);

@@ -1,4 +1,4 @@
-import { getAllCourses, createEnrollment } from '../../repo/enrollment';
+import { getAllStudents, createStudent } from '../../repo/student';
 
 export async function GET(request) {
   const url = new URL(request.url);
@@ -13,7 +13,7 @@ export async function GET(request) {
     const filters = {};
     if (searchTerm) filters.name = { contains: searchTerm };
     
-    const result = await getAllCourses(
+    const result = await getAllStudents(
       filters,
       { field: sortField, direction: sortOrder },
       page,
@@ -32,8 +32,8 @@ export async function GET(request) {
 export async function POST(request) {
   try {
     const body = await request.json();
-    const course = await createCourse(body);
-    return Response.json(course, { status: 201 });
+    const student = await createStudent(body);
+    return Response.json(student, { status: 201 });
   } catch (error) {
     return Response.json(
       { error: error.message },
