@@ -1,2 +1,2 @@
-# CMPS350-L51-Group-Project
+# Student Management Application
 Web Development Group Project: QU Student Management Application
