@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Courses</title>
+    <title>Admin Dashboard - QU Student Management</title>
     <link rel="stylesheet" href="./css/styles.css">
     <script src="./js/common.js"></script>
     <script src="./js/adminScript.js"></script>
-    
 </head>
 <body>
     <header>
@@ -15,6 +14,7 @@
             <div class="logo">QU Student Management - Admin</div>
             <div class="user-info">
                 <span id="userName">Admin</span>
+                <button id="viewStatisticsBtn" class="nav-btn">Statistics</button>
                 <button id="logoutBtn">Logout</button>
             </div>
         </nav>
@@ -25,6 +25,7 @@
             <h2>Courses and Classes</h2>
             <div id="courseClassList">
                 <!-- Dynamic course/class list will be loaded here -->
+                <div class="loading" id="coursesLoading"></div>
             </div>
         </section>
 
@@ -45,11 +46,17 @@
             <form id="createClassForm">
                 <input type="text" id="classCourseId" placeholder="Course ID" required>
                 <input type="text" id="instructorId" placeholder="Instructor ID" required>
-                <input type="number" id="maxStudents" placeholder="Max Students" required>
+                <input type="number" id="maxStudents" placeholder="Max Students" required min="5" max="50">
                 <button type="submit">Add Class</button>
             </form>
         </section>
     </main>
-   
+
+    <!-- Success message toast -->
+    <div id="toast" class="toast" style="display: none;">
+        <div class="toast-content">
+            <span id="toastMessage"></span>
+        </div>
+    </div>
 </body>
 </html>

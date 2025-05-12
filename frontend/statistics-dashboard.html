@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics Dashboard - QU Student Management</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/common.js"></script>
+    <script src="./js/statisticsScript.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">QU Student Management - Statistics</div>
+            <div class="user-info">
+                <span id="userName">User Name</span>
+                <button id="logoutBtn">Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="dashboard-container">
+        <div class="navigation-buttons">
+            <button id="backToMain" class="nav-btn">Back to Admin Dashboard</button>
+        </div>
+
+        <section class="dashboard-section">
+            <h2>Enrollment Statistics</h2>
+            <div class="statistics-grid">
+                <div class="stat-card">
+                    <h3>Total Students</h3>
+                    <div class="stat-value" id="totalStudents">
+                        <div class="loading" style="height: 40px;"></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Courses</h3>
+                    <div class="stat-value" id="totalCourses">
+                        <div class="loading" style="height: 40px;"></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Classes</h3>
+                    <div class="stat-value" id="totalClasses">
+                        <div class="loading" style="height: 40px;"></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <h3>Average Class Size</h3>
+                    <div class="stat-value" id="avgClassSize">
+                        <div class="loading" style="height: 40px;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="dashboard-section">
+            <h2>Enrollment by Course</h2>
+            <div class="chart-container">
+                <canvas id="courseEnrollmentChart"></canvas>
+            </div>
+        </section>
+
+        <section class="dashboard-section">
+            <h2>Course Categories Distribution</h2>
+            <div class="chart-container">
+                <canvas id="categoryDistributionChart"></canvas>
+            </div>
+        </section>
+
+        <section class="dashboard-section">
+            <h2>Student Progress</h2>
+            <div class="chart-container">
+                <canvas id="studentProgressChart"></canvas>
+            </div>
+        </section>
+
+        <section class="dashboard-section">
+            <h2>Grade Distribution</h2>
+            <div class="chart-container">
+                <canvas id="gradeDistributionChart"></canvas>
+            </div>
+        </section>
+
+        <section class="dashboard-section">
+            <h2>Instructor Teaching Load</h2>
+            <div class="chart-container">
+                <canvas id="instructorClassChart"></canvas>
+            </div>
+        </section>
+
+        <section class="dashboard-section">
+            <h2>Registration Trends</h2>
+            <div class="chart-container">
+                <canvas id="registrationTrendsChart"></canvas>
+            </div>
+        </section>
+
+        <section class="dashboard-section">
+            <h2>Course Completion Rates</h2>
+            <div class="chart-container">
+                <canvas id="completionRatesChart"></canvas>
+            </div>
+        </section>
+
+        <section class="dashboard-section">
+            <h2>Recent Registrations</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th>Course</th>
+                            <th>Class</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recentRegistrationsList">
+                        <!-- Registration data will be loaded here -->
+                        <tr>
+                            <td colspan="4">
+                                <div class="loading"></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="dashboard-section">
+            <h2>Prerequisite Analysis</h2>
+            <div class="chart-container">
+                <canvas id="prerequisiteAnalysisChart"></canvas>
+            </div>
+        </section>
+
+        <section class="dashboard-section">
+            <h2>Most Popular Courses</h2>
+            <div class="chart-container">
+                <canvas id="popularCoursesChart"></canvas>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

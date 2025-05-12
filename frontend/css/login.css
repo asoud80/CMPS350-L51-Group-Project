@@ -57,6 +57,34 @@ body {
     margin-top: 10px;
 }
 
+/* Social login section */
+.social-login {
+    margin-top: 20px;
+    border-top: 1px solid #ccc;
+    padding-top: 15px;
+}
+
+.social-login p {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.github-btn {
+    width: 150px;
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.github-btn:hover {
+    background-color: #000;
+}
+
 /*Responsive Design for mobile*/
 @media (max-width: 500px) {
     .container h1 {
@@ -82,7 +110,7 @@ body {
         margin: 4px 0 10px;
     }
 
-    .btn-primary {
+    .btn-primary, .github-btn {
         width: 220px;
         padding: 12px;
         font-size: 10px;

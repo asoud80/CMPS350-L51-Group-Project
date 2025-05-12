@@ -17,6 +17,11 @@ document.addEventListener('DOMContentLoaded', function() {
     let allUsers = [];
     let classes = [];
     
+    // Display username in header
+    if (currentUser) {
+        document.getElementById('userName').textContent = currentUser.name;
+    }
+
     // Add event listeners
     courseSearch.addEventListener('input', filterCourses);
     categoryFilter.addEventListener('change', filterCourses);
@@ -56,44 +61,132 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => {
                 console.error('Error loading users:', error);
+                // Try to load from localStorage
+                allUsers = JSON.parse(localStorage.getItem('allUsers') || '[]');
             });
     }
     
     // Function to load courses
     function loadCourses() {
-        fetch('../backend/json-files/courses.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Failed to load courses data');
+        // Try multiple potential paths
+        const possiblePaths = [
+            '../backend/json-files/courses.json',
+            '/backend/json-files/courses.json',
+            '/json-files/courses.json',
+            '/api/courses'
+        ];
+        
+        let pathIndex = 0;
+        tryLoadCourses();
+        
+        function tryLoadCourses() {
+            if (pathIndex >= possiblePaths.length) {
+                // All paths failed, try localStorage or use mockup data
+                const cachedCourses = JSON.parse(localStorage.getItem('courses') || '[]');
+                if (cachedCourses.length > 0) {
+                    console.log('Using cached courses data');
+                    window.allCourses = cachedCourses;
+                    displayCourses(cachedCourses);
+                } else {
+                    console.log('Using mock courses data');
+                    const mockCourses = getMockCourses();
+                    window.allCourses = mockCourses;
+                    displayCourses(mockCourses);
+                    localStorage.setItem('courses', JSON.stringify(mockCourses));
                 }
-                return response.json();
-            })
-            .then(courses => {
-                window.allCourses = courses;
-                displayCourses(courses);
-            })
-            .catch(error => {
-                console.error('Error loading courses:', error);
-                document.getElementById('courseList').innerHTML = 
-                    '<div class="error-message">Failed to load courses. Please try again later.</div>';
-            });
+                return;
+            }
+            
+            fetch(possiblePaths[pathIndex])
+                .then(response => {
+                    if (!response.ok) throw new Error('Failed to load courses data');
+                    return response.json();
+                })
+                .then(result => {
+                    // Handle potential API response format
+                    const courses = result.data || result;
+                    window.allCourses = courses;
+                    displayCourses(courses);
+                    localStorage.setItem('courses', JSON.stringify(courses));
+                })
+                .catch(error => {
+                    console.warn(`Failed to load courses from ${possiblePaths[pathIndex]}:`, error);
+                    pathIndex++;
+                    tryLoadCourses();
+                });
+        }
+    }
+    
+    // Mock courses data for fallback
+    function getMockCourses() {
+        return [
+            {
+                "id": "CMPS101",
+                "name": "Introduction to Computing",
+                "category": "Foundation",
+                "credits": 3,
+                "prerequisites": [],
+                "isOpenForRegistration": true,
+                "description": "Basic concepts of computer systems, including hardware, software, and information processing."
+            },
+            {
+                "id": "CMPS151",
+                "name": "Programming Concepts",
+                "category": "Programming",
+                "credits": 3,
+                "prerequisites": [],
+                "isOpenForRegistration": true,
+                "description": "Introduction to programming concepts using a high-level language."
+            },
+            {
+                "id": "CMPS251",
+                "name": "Object-Oriented Programming",
+                "category": "Programming",
+                "credits": 4,
+                "prerequisites": ["CMPS151"],
+                "isOpenForRegistration": true,
+                "description": "Object-oriented design and implementation using a modern OOP language."
+            },
+            {
+                "id": "CMPS303",
+                "name": "Data Structures",
+                "category": "Algorithms",
+                "credits": 4,
+                "prerequisites": ["CMPS251"],
+                "isOpenForRegistration": true,
+                "description": "Basic data structures and algorithms including lists, stacks, queues, trees, and graphs."
+            },
+            {
+                "id": "CMPS351",
+                "name": "Database Systems",
+                "category": "Databases",
+                "credits": 4,
+                "prerequisites": ["CMPS251"],
+                "isOpenForRegistration": true,
+                "description": "Introduction to database concepts, data models, relational database design."
+            }
+        ];
     }
     
     // Function to load classes
     function loadClasses() {
-        // In a real application, this would be fetched from a JSON file or API
-        // For now, we'll use mock data
-        classes = [
-            { classId: 'CLS101', courseId: 'CMPS101', instructorId: 'i2001', students: ['s1001'], status: 'validated', maxStudents: 30 },
-            { classId: 'CLS151', courseId: 'CMPS151', instructorId: 'i2003', students: ['s1002'], status: 'validated', maxStudents: 30 },
-            { classId: 'CLS251', courseId: 'CMPS251', instructorId: 'i2003', students: ['s1003', 's1004'], status: 'validated', maxStudents: 30 },
-            { classId: 'CLS303', courseId: 'CMPS303', instructorId: 'i2002', students: ['s1004', 's1005'], status: 'validated', maxStudents: 30 },
-            { classId: 'CLS310', courseId: 'CMPS310', instructorId: 'i2003', students: ['s1005'], status: 'validated', maxStudents: 30 },
-            { classId: 'CLS351', courseId: 'CMPS351', instructorId: 'i2001', students: ['s1005', 's1006'], status: 'validated', maxStudents: 30 }
-        ];
-        
-        // Store in localStorage for use in learning path
-        localStorage.setItem('classes', JSON.stringify(classes));
+        fetch('../backend/json-files/classes.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to load classes data');
+                }
+                return response.json();
+            })
+            .then(classesData => {
+                classes = classesData;
+                // Store in localStorage for use in learning path
+                localStorage.setItem('classes', JSON.stringify(classes));
+            })
+            .catch(error => {
+                console.error('Error loading classes:', error);
+                // Try to load from localStorage
+                classes = JSON.parse(localStorage.getItem('classes') || '[]');
+            });
     }
     
     // Function to display courses
@@ -122,6 +215,9 @@ document.addEventListener('DOMContentLoaded', function() {
             // Check if user can register (has completed prerequisites)
             const canRegister = checkPrerequisites(course);
             
+            // Check if already enrolled
+            const isEnrolled = checkIfEnrolled(course.id);
+            
             // Create course card and add a Register button if it's open
             courseCard.innerHTML = `
                 <h3>${course.id}: ${course.name}</h3>
@@ -131,15 +227,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="status ${statusClass}">
                     ${course.isOpenForRegistration ? 'Open for Registration' : 'Closed'}
                 </div>
-                ${course.isOpenForRegistration ? 
-                    `<button class="register-btn" data-course-id="${course.id}" ${!canRegister ? 'disabled' : ''}>
-                        ${canRegister ? 'Register' : 'Prerequisites Not Met'}
-                    </button>` : ''}
+                ${isEnrolled ? 
+                    '<div class="enrolled-status">Already Enrolled</div>' :
+                    course.isOpenForRegistration ? 
+                        `<button class="register-btn" data-course-id="${course.id}" ${!canRegister ? 'disabled' : ''}>
+                            ${canRegister ? 'Register' : 'Prerequisites Not Met'}
+                        </button>` : ''}
             `;
             
             // Add event listener to the register button
             const registerBtn = courseCard.querySelector('.register-btn');
-            if (registerBtn) {
+            if (registerBtn && !registerBtn.disabled) {
                 registerBtn.addEventListener('click', () => openRegistrationModal(course));
             }
             
@@ -147,17 +245,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Function to check if user has completed prerequisites
+    // Rest of your functions remain unchanged
+    function checkIfEnrolled(courseId) {
+        if (!currentUser || !currentUser.inProgressCourses) return false;
+        
+        return currentUser.inProgressCourses.some(course => course.courseId === courseId);
+    }
+    
     function checkPrerequisites(course) {
         if (!course.prerequisites || course.prerequisites.length === 0) {
             return true;
         }
         
+        if (!currentUser.completedCourses) return false;
+        
         const completedCourseIds = currentUser.completedCourses.map(c => c.courseId);
         return course.prerequisites.every(prereq => completedCourseIds.includes(prereq));
     }
     
-    // Function to open registration modal
     function openRegistrationModal(course) {
         modalCourseName.textContent = `${course.id}: ${course.name}`;
         courseDescription.textContent = course.description;
@@ -167,7 +272,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Get instructors who can teach this course
         const instructors = allUsers.filter(user => 
             user.userType === 'instructor' && 
-            (!user.expertiseAreas || user.expertiseAreas.includes(course.category))
+            (!user.expertiseAreas || user.expertiseAreas.includes(course.category) || 
+             (user.teachingCourses && user.teachingCourses.includes(course.id)))
         );
         
         // Get classes for this course
@@ -176,33 +282,37 @@ document.addEventListener('DOMContentLoaded', function() {
         // Display instructors and their classes
         instructorList.innerHTML = '';
         
-        instructors.forEach(instructor => {
-            const instructorClasses = courseClasses.filter(cls => cls.instructorId === instructor.id);
+        if (courseClasses.length === 0) {
+            instructorList.innerHTML = '<p>No available classes for this course at the moment.</p>';
+            return;
+        }
+        
+        courseClasses.forEach(cls => {
+            const instructor = instructors.find(instr => instr.id === cls.instructorId);
+            if (!instructor) return;
             
-            instructorClasses.forEach(cls => {
-                const remainingSpots = cls.maxStudents - cls.students.length;
-                const instructorItem = document.createElement('div');
-                instructorItem.className = 'instructor-item';
-                
-                instructorItem.innerHTML = `
-                    <div>
-                        <div><strong>${instructor.name}</strong></div>
-                        <div>Class: ${cls.classId} - ${cls.students.length}/${cls.maxStudents} students</div>
-                    </div>
-                    <button class="register-btn" data-class-id="${cls.classId}" 
-                        ${remainingSpots <= 0 ? 'disabled' : ''}>
-                        ${remainingSpots > 0 ? 'Select' : 'Full'}
-                    </button>
-                `;
-                
-                // Add event listener to register button
-                const classRegisterBtn = instructorItem.querySelector('.register-btn');
-                if (classRegisterBtn && !classRegisterBtn.disabled) {
-                    classRegisterBtn.addEventListener('click', () => registerForClass(cls, course));
-                }
-                
-                instructorList.appendChild(instructorItem);
-            });
+            const remainingSpots = cls.maxStudents - cls.students.length;
+            const instructorItem = document.createElement('div');
+            instructorItem.className = 'instructor-item';
+            
+            instructorItem.innerHTML = `
+                <div>
+                    <div><strong>${instructor.name}</strong></div>
+                    <div>Class: ${cls.classId} - ${cls.students.length}/${cls.maxStudents} students</div>
+                </div>
+                <button class="register-btn" data-class-id="${cls.classId}" 
+                    ${remainingSpots <= 0 ? 'disabled' : ''}>
+                    ${remainingSpots > 0 ? 'Select' : 'Full'}
+                </button>
+            `;
+            
+            // Add event listener to register button
+            const classRegisterBtn = instructorItem.querySelector('.register-btn');
+            if (classRegisterBtn && !classRegisterBtn.disabled) {
+                classRegisterBtn.addEventListener('click', () => registerForClass(cls, course));
+            }
+            
+            instructorList.appendChild(instructorItem);
         });
         
         if (instructorList.children.length === 0) {
@@ -213,7 +323,6 @@ document.addEventListener('DOMContentLoaded', function() {
         registrationModal.style.display = 'block';
     }
     
-    // Function to register for a class
     function registerForClass(cls, course) {
         // Check if already registered
         if (cls.students.includes(currentUser.id)) {
@@ -229,7 +338,6 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('classes', JSON.stringify(classes));
         
         // Create "in progress" course in user's record if doesn't exist yet
-        // In a real app, this would be done on the server
         if (!currentUser.inProgressCourses) {
             currentUser.inProgressCourses = [];
         }
@@ -254,15 +362,16 @@ document.addEventListener('DOMContentLoaded', function() {
         // Disable all registration buttons
         const allButtons = instructorList.querySelectorAll('.register-btn');
         allButtons.forEach(btn => btn.disabled = true);
+        
+        // Refresh course list to update "Already Enrolled" status
+        displayCourses(window.allCourses);
     }
     
-    // Helper function to get instructor name
     function getInstructorName(instructorId) {
         const instructor = allUsers.find(user => user.id === instructorId);
         return instructor ? instructor.name : 'Unknown Instructor';
     }
     
-    // Function to filter courses
     function filterCourses() {
         const searchTerm = courseSearch.value.toLowerCase();
         const categoryValue = categoryFilter.value;

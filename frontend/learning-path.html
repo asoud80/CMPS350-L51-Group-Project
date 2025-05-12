@@ -1,10 +1,9 @@
-<!-- learning-path.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Learning Path</title>
+    <title>My Learning Path - QU Student Management</title>
     <link rel="stylesheet" href="./css/styles.css">
     <script src="./js/common.js"></script>
     <script src="./js/learningPath.js"></script>
@@ -31,17 +30,23 @@
             <div class="learning-paths">
                 <div class="path-section">
                     <h3>Completed Courses</h3>
-                    <div id="completedCourses" class="course-list"></div>
+                    <div id="completedCourses" class="course-list">
+                        <div class="loading" id="completedLoading"></div>
+                    </div>
                 </div>
                 
                 <div class="path-section">
                     <h3>In Progress</h3>
-                    <div id="inProgressCourses" class="course-list"></div>
+                    <div id="inProgressCourses" class="course-list">
+                        <div class="loading" id="inProgressLoading"></div>
+                    </div>
                 </div>
                 
                 <div class="path-section">
                     <h3>Pending Registration</h3>
-                    <div id="pendingCourses" class="course-list"></div>
+                    <div id="pendingCourses" class="course-list">
+                        <div class="loading" id="pendingLoading"></div>
+                    </div>
                 </div>
             </div>
         </section>

@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Courses</title>
+    <title>Instructor Dashboard - QU Student Management</title>
     <link rel="stylesheet" href="./css/styles.css">
     <script src="./js/common.js"></script>
     <script src="./js/instrScript.js"></script>
-    
 </head>
 <body>
     <header>
@@ -24,9 +23,17 @@
         <section class="dashboard-section">
             <h2>Your Classes</h2>
             <div id="instructorClasses">
-                <!-- Dynamic classes with students and grade forms will appear here -->
+                <!-- Classes content will be loaded here -->
+                <div class="loading" id="classesLoading"></div>
             </div>
         </section>
     </main>
+
+    <!-- Success message toast -->
+    <div id="toast" class="toast" style="display: none;">
+        <div class="toast-content">
+            <span id="toastMessage"></span>
+        </div>
+    </div>
 </body>
 </html>
